@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* The main flex structure is handled in header.ejs */
+/* DO NOT set display:flex here again */
+
+/* Page content will stretch automatically */
+main {
+  flex: 1;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+/* Footer styling */
+footer {
+  margin-top: auto;
+  padding: 15px 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+

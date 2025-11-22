@@ -1,0 +1,48 @@
+<%- include('./partials/header') %>
+<%- include('./partials/main_nav') %>
+
+<div class="container my-4">
+  <h1>My Habits</h1>
+
+  <div class="text-end mb-3">
+    <a href="/habits/add" class="btn btn-success">Add Habit</a>
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Habit</th>
+        <th>Frequency</th>
+        <th>Streak</th>
+        <th>Description</th>
+        <th>Notes</th>
+        <th style="width: 160px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (habits && habits.length > 0) { %>
+        <% habits.forEach(habit => { %>
+          <tr>
+            <td><%= habit.habitName %></td>
+            <td><%= habit.frequency %></td>
+            <td><%= habit.streak %></td>
+            <td><%= habit.description %></td>
+            <td><%= habit.notes %></td>
+            <td>
+              <a href="/habits/edit/<%= habit._id %>" class="btn btn-sm btn-primary">Edit</a>
+              <a href="/habits/delete/<%= habit._id %>" class="btn btn-sm btn-danger ms-1">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="6" class="text-center">
+            No habits yet. Click “Add Habit” to begin.
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('./partials/footer') %>

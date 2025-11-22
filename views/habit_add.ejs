@@ -1,0 +1,43 @@
+<%- include('./partials/header') %>
+<%- include('./partials/main_nav') %>
+
+<div class="container my-4">
+  <h1>Add Habit</h1>
+
+  <form action="/habits/add" method="POST">
+    <div class="mb-3">
+      <label for="habitName" class="form-label">Habit Name</label>
+      <input type="text" id="habitName" name="habitName" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="frequency" class="form-label">Frequency</label>
+      <select id="frequency" name="frequency" class="form-select" required>
+        <option value="">-- Select --</option>
+        <option value="Daily">Daily</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Monthly">Monthly</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="streak" class="form-label">Current Streak (days)</label>
+      <input type="number" id="streak" name="streak" class="form-control" min="0" value="0">
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="notes" class="form-label">Notes</label>
+      <textarea id="notes" name="notes" class="form-control" rows="2"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Habit</button>
+    <a href="/habits" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>
+
+<%- include('./partials/footer') %>

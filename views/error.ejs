@@ -1,0 +1,12 @@
+<%- include('./partials/header') %>
+<%- include('./partials/main_nav') %>
+
+<div class="container my-4">
+  <h1>Error</h1>
+  <h3><%= message %></h3>
+  <% if (error && error.stack) { %>
+    <pre><%= error.stack %></pre>
+  <% } %>
+</div>
+
+<%- include('./partials/footer') %>
