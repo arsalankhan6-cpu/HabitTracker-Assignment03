@@ -10,6 +10,7 @@ const habitRoutes = require('../routes/habits');
 const app = express();
 
 // view engine setup
+// where the EJS veiw files are stored
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
