@@ -5,7 +5,9 @@
   <h1>My Habits</h1>
 
   <div class="text-end mb-3">
-    <a href="/habits/add" class="btn btn-success">Add Habit</a>
+    <% if (user) { %>
+      <a href="/habits/add" class="btn btn-success">Add Habit</a>
+    <% } %>
   </div>
 
   <table class="table table-bordered table-striped table-hover">
@@ -19,6 +21,7 @@
         <th style="width: 160px;">Actions</th>
       </tr>
     </thead>
+
     <tbody>
       <% if (habits && habits.length > 0) { %>
         <% habits.forEach(habit => { %>
@@ -28,10 +31,16 @@
             <td><%= habit.streak %></td>
             <td><%= habit.description %></td>
             <td><%= habit.notes %></td>
+
             <td>
-              <a href="/habits/edit/<%= habit._id %>" class="btn btn-sm btn-primary">Edit</a>
-              <a href="/habits/delete/<%= habit._id %>" class="btn btn-sm btn-danger ms-1">Delete</a>
+              <% if (user) { %>
+                <a href="/habits/edit/<%= habit._id %>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/habits/delete/<%= habit._id %>" class="btn btn-sm btn-danger ms-1">Delete</a>
+              <% } else { %>
+                <span class="text-muted">View Only</span>
+              <% } %>
             </td>
+
           </tr>
         <% }) %>
       <% } else { %>

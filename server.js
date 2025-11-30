@@ -1,9 +1,8 @@
 #!/usr/bin/env node
+require('dotenv').config(); // load .env
 
-require('dotenv').config();
-
-const app = require('./config/app');
 const http = require('http');
+const app = require('./config/app');
 
 const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
@@ -43,4 +42,3 @@ function onListening() {
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   console.log('Listening on ' + bind);
 }
-

@@ -1,10 +1,13 @@
 // routes/habits.js
+
+const { ensureAuth } = require('../middleware/auth');
+
 const express = require('express');
 const router = express.Router();
 const Habit = require('../models/habit');
 
 // --------- LIST HABITS (READ) -------------
-// GET /habits
+// GET /habits  --> PUBLIC (view only)
 router.get('/', async (req, res, next) => {
   try {
     const habits = await Habit.find().sort({ createdAt: -1 });
@@ -18,16 +21,16 @@ router.get('/', async (req, res, next) => {
 });
 
 // --------- SHOW ADD FORM (CREATE - GET) -----
-// GET /habits/add
-router.get('/add', (req, res) => {
+// GET /habits/add  --> AUTH ONLY
+router.get('/add', ensureAuth, (req, res) => {
   res.render('habit_add', {
     title: 'Add Habit'
   });
 });
 
 // --------- HANDLE ADD FORM (CREATE - POST) ---
-// POST /habits/add
-router.post('/add', async (req, res, next) => {
+// POST /habits/add  --> AUTH ONLY
+router.post('/add', ensureAuth, async (req, res, next) => {
   try {
     const { habitName, frequency, streak, description, notes } = req.body;
 
@@ -51,9 +54,9 @@ router.post('/add', async (req, res, next) => {
   }
 });
 
-// --------- SHOW EDIT FORM (UPDATE - GET) -----
-// GET /habits/edit/:id
-router.get('/edit/:id', async (req, res, next) => {
+// SHOW EDIT FORM (UPDATE - GET) 
+// GET /habits/edit/:id  --> AUTH ONLY
+router.get('/edit/:id', ensureAuth, async (req, res, next) => {
   try {
     const habit = await Habit.findById(req.params.id);
     if (!habit) {
@@ -72,8 +75,8 @@ router.get('/edit/:id', async (req, res, next) => {
 });
 
 // --------- HANDLE EDIT FORM (UPDATE - POST) ---
-// POST /habits/edit/:id
-router.post('/edit/:id', async (req, res, next) => {
+// POST /habits/edit/:id  --> AUTH ONLY
+router.post('/edit/:id', ensureAuth, async (req, res, next) => {
   try {
     const { habitName, frequency, streak, description, notes } = req.body;
 
@@ -96,8 +99,8 @@ router.post('/edit/:id', async (req, res, next) => {
 });
 
 // --------- SHOW DELETE CONFIRM (DELETE - GET) ---
-// GET /habits/delete/:id
-router.get('/delete/:id', async (req, res, next) => {
+// GET /habits/delete/:id  --> AUTH ONLY
+router.get('/delete/:id', ensureAuth, async (req, res, next) => {
   try {
     const habit = await Habit.findById(req.params.id);
     if (!habit) {
@@ -116,8 +119,8 @@ router.get('/delete/:id', async (req, res, next) => {
 });
 
 // --------- HANDLE DELETE (DELETE - POST) -------
-// POST /habits/delete/:id
-router.post('/delete/:id', async (req, res, next) => {
+// POST /habits/delete/:id  --> AUTH ONLY
+router.post('/delete/:id', ensureAuth, async (req, res, next) => {
   try {
     await Habit.findByIdAndDelete(req.params.id);
     res.redirect('/habits');
