@@ -23,7 +23,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/auth/google/callback'
+        callbackURL: 'https://habittracker-assignment03-1.onrender.com/auth/google/callback'
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -51,7 +51,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: '/auth/github/callback'
+        callbackURL: 'http://habittracker-assignment03-1.onrender.com/auth/github/callback'
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
